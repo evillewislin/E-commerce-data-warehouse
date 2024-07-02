@@ -41,3 +41,30 @@
 数据采集
     数据仓库的数据源数据需要从数据库周期性同步过来。
     使用DataX和Maxw、flume采集到HDFS解Hive的耦合
+数据同步的方式：
+    全量数据同步：表的全部数据。
+    增量数据同步：表的新增及变化的数据。
+    采集数据的目的，为了后期的统计分析做准备
+        需求1：当前电商网站所以得注册用户的数量
+            Select count(*) from t_user
+        需求2：当前电商网站最近1周的新增注册用户的数量
+            Select count(*) from t_user where regdate >= 10-05 and regdate <= 10-12
+            增量生成的一个表 t_user_7
+            Select count(*) from t_user_7
+数据同步格式：
+    1、用户行为日志数据
+        格式：JSON 
+        1.1 页面浏览日志
+            common：环境信息
+            action：动作信息
+            displays：曝光信息
+            page：页面信息
+            err：错误信息
+            ts：进入当前页面的时间戳（毫秒）
+        1.2 APP启动日志
+            common：环境信息
+            start：启动信息
+            err：错误信息
+            ts：启动APP时间戳（毫秒）
+日志数据采集
+    Log
